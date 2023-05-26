@@ -1,0 +1,78 @@
+  
+      {/* {restaurantId ? <Text>{restaurantId}</Text> : null} */}
+      <ScrollView>
+        {restaurants.map((restaurant) => (
+          <View key={restaurant._id} style={styles.restaurantContainer}>
+            <TouchableWithoutFeedback
+              onPress={() => handleRestaurantPress(restaurant)}
+            >
+              <Image
+                source={{
+                  uri: getMapImageUrl(
+                    restaurant.latitude,
+                    restaurant.longitude
+                  ),
+                }}
+                style={styles.image}
+              />
+            </TouchableWithoutFeedback>
+
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("Map", {
+                  latitude: restaurant.latitude,
+                  longitude: restaurant.longitude,
+                })
+              }
+              style={[styles.button, styles.profileButton]}
+            >
+              <View style={styles.container}>
+              <Text style={styles.buttonText}>Position</Text>
+              </View>
+             
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() =>
+                navigation.navigate("Filtrage", {
+                  latitude: restaurant.latitude,
+                  longitude: restaurant.longitude,
+                })
+              }style={[styles.button, styles.profileButton]}><View style={styles.container}>
+              <Text style={styles.buttonText} >Filtrage</Text>
+              </View></TouchableOpacity>
+          </View>
+        ))}
+      </ScrollView>
+      {/* <Button title="Voir la carte" onPress={handlePress} /> */}
+      <TouchableOpacity onPress={handlePress} style={styles.button}>
+        <Text style={styles.buttonText2}>Voir la carte</Text>
+      </TouchableOpacity>
+
+
+
+
+
+
+
+
+flip card HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
+
+
+<FlipCard
+      style={styles.card}
+      friction={6}
+      perspective={1000}
+      flipHorizontal={true}
+      flipVertical={false}
+      flip={false}
+      clickable={true}
+      onFlipEnd={(isFlipEnd) => { console.log('isFlipEnd', isFlipEnd) }}
+    >
+      {/* Face Side */}
+      <View style={styles.face}>
+        <Text>The Face</Text>
+      </View>
+      {/* Back Side */}
+      <View style={styles.back}>
+        <Text>The Back</Text>
+      </View>
+    </FlipCard>
