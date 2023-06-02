@@ -1,33 +1,10 @@
-// useEffect(() => {
-//   const fetchRestaurants = async () => {
-//     try {
-//       const response = await fetch(
-//         "https://backend-seven-virid.vercel.app/api/restaurants/"
-//       );
-//       const data = await response.json();
-
-//       if (Array.isArray(data)) {
-//         setRestaurants(data);
-//       } else {
-//         setRestaurants([data]);
-//       }
-//     } catch (error) {
-//       console.error("Error fetching restaurants:", error);
-//     }
-//   };
-
-//   fetchRestaurants();
-// }, []);
-import FlipCard from 'react-native-flip-card'
-import { Card } from 'react-native-shadow-cards';
-
+import { Card } from "react-native-shadow-cards";
 
 import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
   StyleSheet,
-  Button,
   Image,
   ScrollView,
   Modal,
@@ -52,7 +29,7 @@ const Profile = () => {
       try {
         let url = "https://backend-seven-virid.vercel.app/api/restaurants/";
         if (restaurantId) {
-          url += "zone/"+restaurantId;
+          url += "zone/" + restaurantId;
         }
 
         const response = await fetch(url);
@@ -86,14 +63,6 @@ const Profile = () => {
     setModalVisible(false);
   };
 
-  const getMapImageUrl = (latitude, longitude) => {
-    const apiKey =
-      "oNAnkdmf6nmMOCImi14z~vVx1BJ7FiUF0uaa7PBH55w~AtKIR_zdPCtxMIW5xbOR7RyXEgxNvfbuNKx3oCxrSeW3Ecy5twtmIfM-0wOla8FU";
-    const size = "500,500";
-    const mapImageUrl = `https://dev.virtualearth.net/REST/v1/Imagery/Map/Road/${latitude},${longitude}/15?mapSize=${size}&pp=${latitude},${longitude};66;Marker&key=${apiKey}`;
-    return mapImageUrl;
-  };
-
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -106,10 +75,7 @@ const Profile = () => {
                 >
                   <Image
                     source={{
-                      uri: getMapImageUrl(
-                        restaurant.latitude,
-                        restaurant.longitude
-                      ),
+                      uri: restaurant.imagesrc,
                     }}
                     style={styles.image}
                   />
@@ -144,14 +110,13 @@ const Profile = () => {
                     </View>
                   </TouchableOpacity>
                 </View>
-
-
-
               </View>
-
-
             </ScrollView>
-            <Modal visible={modalVisible} animationType="fade" transparent={false}>
+            <Modal
+              visible={modalVisible}
+              animationType="fade"
+              transparent={false}
+            >
               <TouchableWithoutFeedback onPress={closeModal}>
                 <View style={styles.modalContainer}>
                   {selectedRestaurantInfo && (
@@ -175,8 +140,6 @@ const Profile = () => {
               </TouchableWithoutFeedback>
             </Modal>
           </Card>
-
-
         ))}
       </View>
     </ScrollView>
@@ -197,13 +160,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
- 
+
   restaurantContainer: {
     marginBottom: 20,
 
-    justifyContent: 'center',
-    alignItems: 'center',
-
+    justifyContent: "center",
+    alignItems: "center",
   },
   image: {
     width: 300,
@@ -233,7 +195,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     width: 150,
     marginHorizontal: "2%",
-
   },
   profileButton: {
     backgroundColor: "#5BC0BE", // Remplacez par la couleur souhaitée pour le bouton "Profile"
@@ -251,9 +212,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   buttonContainer11: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: 10, // Optional: Adjust the spacing between the image and buttons
   },
 });
